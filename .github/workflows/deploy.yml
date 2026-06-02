@@ -19,13 +19,24 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
+      # - name: Build image
+      #   run: docker build -t anushkadarr/k8s-cicd-app:latest .
+
+      # - name: Push image
+      #   run: docker push anushkadarr/k8s-cicd-app:latest
+
+      # # - name: Deploy to cluster
+      # #   run: kubectl apply -f k8s/deployment.yml  
+      # - name: Deploy to cluster
+      #   run: kubectl apply -f k8s/  
+
       - name: Build image
-        run: docker build -t anushkadarr/k8s-cicd-app:latest .
+        run: docker build -t anushkadarr/k8s-cicd-app:${{ github.sha }} .
 
       - name: Push image
-        run: docker push anushkadarr/k8s-cicd-app:latest
+        run: docker push anushkadarr/k8s-cicd-app:${{ github.sha }}
 
-      # - name: Deploy to cluster
-      #   run: kubectl apply -f k8s/deployment.yml  
       - name: Deploy to cluster
-        run: kubectl apply -f k8s/  
+        run: |
+          kubectl set image deployment/k8s-cicd-app \
+            k8s-cicd-app=anushkadarr/k8s-cicd-app:${{ github.sha }}
