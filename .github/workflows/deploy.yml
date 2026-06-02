@@ -26,4 +26,4 @@ jobs:
         run: docker push anushkadarr/k8s-cicd-app:latest
 
       - name: Deploy to cluster
-        run: kubectl apply -f k8s/deployment.yaml  
+        run: kubectl apply -f k8s/deployment.yml  
