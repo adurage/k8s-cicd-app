@@ -6,7 +6,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -23,3 +24,6 @@ jobs:
 
       - name: Push image
         run: docker push anushkadarr/k8s-cicd-app:latest
+
+      - name: Deploy to cluster
+        run: kubectl apply -f k8s/deployment.yaml  
