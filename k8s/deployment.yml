@@ -17,3 +17,4 @@ spec:
         image: anushkadarr/k8s-cicd-app:latest
         ports:
         - containerPort: 3000
+        
