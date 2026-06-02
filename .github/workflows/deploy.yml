@@ -22,4 +22,4 @@ jobs:
         run: docker build -t adurage/k8s-cicd-app:latest .
 
       - name: Push image
-        run: docker push adurage/k8s-cicd-app:latest
+        run: docker push anushkadarr/k8s-cicd-app:latest
